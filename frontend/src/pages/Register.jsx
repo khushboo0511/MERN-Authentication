@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 function Register() {
@@ -7,10 +8,17 @@ function Register() {
         password: '',
     });
 
-    const registerUser = (e) => {
+    const registerUser = async (e) => {
         e.preventDefault();
         // Add registration logic here
-        console.log('Registering user:', data);
+        const {name, email, password} = data
+        try {
+            const {data} = await axios.post('/register', {
+                name, email, password
+            })
+        } catch (error) {
+
+        }
     };
 
     return (
