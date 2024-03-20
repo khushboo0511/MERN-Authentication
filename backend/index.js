@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 //connecting databse
 const dbConnect = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI)
+        await mongoose.connect('mongodb://0.0.0.0:27017/authentication')
         app.listen(4000, () => console.log("Database connected"))
     } catch (error) {
         console.error(error)
@@ -16,8 +16,5 @@ const dbConnect = async () => {
 dbConnect()
 
 const app = express()
-
+app.use(express.json())
 app.use('/', require('./routes/authRoutes'))
-
-const port = 8000
-app.listen(port, () => console.log(`Server is running on port ${port}`))
